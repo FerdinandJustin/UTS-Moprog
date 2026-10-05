@@ -1,0 +1,109 @@
+import 'package:flutter/material.dart';
+
+// ===== MODEL =====
+class Layanan {
+  final String nama;
+  final String deskripsi;
+  final String gambar;
+  final int harga;
+  final int durasi; // menit
+  final IconData ikon;
+
+  const Layanan(this.nama, this.deskripsi, this.gambar, this.harga,
+      this.durasi, this.ikon);
+}
+
+class ItemKeranjang {
+  final Layanan layanan;
+  final String dokter;
+  final List<String> addon;
+  final int total;
+
+  ItemKeranjang(this.layanan, this.dokter, this.addon, this.total);
+}
+
+// ===== DATA DUMMY =====
+const List<Layanan> daftarLayanan = [
+  Layanan(
+      'Scaling & Cleaning',
+      'Pembersihan karang gigi dan plak agar gigi bersih, napas segar, dan gusi lebih sehat.',
+      'assets/scaling.png',
+      350000,
+      45,
+      Icons.cleaning_services),
+  Layanan(
+      'Tambal Gigi',
+      'Menutup gigi berlubang dengan bahan komposit sewarna gigi supaya tampak alami.',
+      'assets/tambal.png',
+      450000,
+      60,
+      Icons.medical_services),
+  Layanan(
+      'Pemutihan Gigi',
+      'Perawatan bleaching untuk mencerahkan warna gigi beberapa tingkat lebih putih.',
+      'assets/bleaching.png',
+      1500000,
+      90,
+      Icons.auto_awesome),
+  Layanan(
+      'Cabut Gigi',
+      'Pencabutan gigi yang rusak atau gigi bungsu dengan prosedur aman dan minim nyeri.',
+      'assets/cabut.png',
+      600000,
+      45,
+      Icons.healing),
+  Layanan(
+      'Perawatan Gigi Anak',
+      'Pemeriksaan dan perawatan gigi untuk anak dengan pendekatan yang ramah dan nyaman.',
+      'assets/anak.png',
+      300000,
+      40,
+      Icons.child_care),
+];
+
+const List<String> daftarDokter = [
+  'drg. Amanda Putri',
+  'drg. Budi Santoso',
+  'drg. Citra Lestari',
+];
+
+// dua list ini berpasangan (index sama)
+const List<String> namaAddon = [
+  'Anestesi lokal',
+  'Fluoride treatment',
+  'Rontgen gigi',
+];
+const List<int> hargaAddon = [75000, 100000, 120000];
+
+// ===== KERANJANG (variabel global, tanpa database) =====
+List<ItemKeranjang> keranjang = [];
+
+int totalHarga() {
+  int hasil = 0;
+  for (int i = 0; i < keranjang.length; i++) {
+    hasil = hasil + keranjang[i].total;
+  }
+  return hasil;
+}
+
+int totalDurasi() {
+  int hasil = 0;
+  for (int i = 0; i < keranjang.length; i++) {
+    hasil = hasil + keranjang[i].layanan.durasi;
+  }
+  return hasil;
+}
+
+String formattingHarga(int harga) {
+  String angka = harga.toString();
+  String hasil = '';
+  int hitung = 0;
+  for (int i = angka.length - 1; i >= 0; i--) {
+    hasil = angka[i] + hasil;
+    hitung++;
+    if (hitung % 3 == 0 && i != 0) {
+      hasil = '.' + hasil;
+    }
+  }
+  return 'Rp ' + hasil;
+}
