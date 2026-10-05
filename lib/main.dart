@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import 'splash_page.dart';
 
 void main() {
   runApp(const Myapp());
@@ -13,7 +13,7 @@ class Myapp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Klinik Gigi',
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }

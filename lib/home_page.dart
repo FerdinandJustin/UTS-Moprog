@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'data.dart';
 import 'detail_page.dart';
 import 'keranjang_page.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -211,6 +212,13 @@ class _HomePageState extends State<HomePage> {
           if (index == 1) {
             bukaKeranjang();
           }
+          if (index == 2) { // BARU
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfilePage()),
+            );
+          }
+
         },
         items: [
           const BottomNavigationBarItem(
