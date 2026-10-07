@@ -5,7 +5,8 @@ import 'pembayaran_page.dart';
 class RingkasanPage extends StatelessWidget {
   final String tanggal;
   final String jam;
-  const RingkasanPage({super.key, required this.tanggal, required this.jam});
+  final List<ItemKeranjang>? items;
+  const RingkasanPage({super.key, required this.tanggal, required this.jam, this.items});
 
   Widget judul(String teks) {
     return Padding(
@@ -30,6 +31,8 @@ class RingkasanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<ItemKeranjang> daftarItem = items ?? keranjang;
+
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
@@ -64,7 +67,7 @@ class RingkasanPage extends StatelessWidget {
                       const Icon(Icons.access_time,
                           color: Colors.blue, size: 20),
                       const SizedBox(width: 10),
-                      Text('Pukul $jam (${totalDurasi()} menit)',
+                      Text('Pukul $jam (${totalDurasi(daftarItem)} menit)',
                           style: const TextStyle(fontSize: 16)),
                     ],
                   ),
@@ -106,7 +109,7 @@ class RingkasanPage extends StatelessWidget {
             kotak(
               Column(
                 children: [
-                  for (int i = 0; i < keranjang.length; i++)
+                  for (int i = 0; i < daftarItem.length; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 6),
                       child: Row(
@@ -116,23 +119,23 @@ class RingkasanPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(keranjang[i].layanan.nama,
+                                Text(daftarItem[i].layanan.nama,
                                     style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold)),
-                                Text(keranjang[i].dokter,
+                                Text(daftarItem[i].dokter,
                                     style: TextStyle(
                                         fontSize: 13,
                                         color: Colors.grey.shade600)),
-                                if (keranjang[i].addon.isNotEmpty)
-                                  Text(keranjang[i].addon.join(', '),
+                                if (daftarItem[i].addon.isNotEmpty)
+                                  Text(daftarItem[i].addon.join(', '),
                                       style: TextStyle(
                                           fontSize: 13,
                                           color: Colors.grey.shade600)),
                               ],
                             ),
                           ),
-                          Text(formattingHarga(keranjang[i].total),
+                          Text(formattingHarga(daftarItem[i].total),
                               style: const TextStyle(fontSize: 15)),
                         ],
                       ),
@@ -144,7 +147,7 @@ class RingkasanPage extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold)),
                       const Spacer(),
-                      Text(formattingHarga(totalHarga()),
+                      Text(formattingHarga(totalHarga(daftarItem)),
                           style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -176,7 +179,7 @@ class RingkasanPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        PembayaranPage(tanggal: tanggal, jam: jam),
+                        PembayaranPage(tanggal: tanggal, jam: jam, items: items),
                   ),
                 );
               },

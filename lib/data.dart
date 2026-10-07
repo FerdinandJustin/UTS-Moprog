@@ -78,18 +78,20 @@ const List<int> hargaAddon = [100000, 120000, 120000];
 // ===== KERANJANG (variabel global, tanpa database) =====
 List<ItemKeranjang> keranjang = [];
 
-int totalHarga() {
+int totalHarga([List<ItemKeranjang>? items]) {
+  List<ItemKeranjang> list = items ?? keranjang;
   int hasil = 0;
-  for (int i = 0; i < keranjang.length; i++) {
-    hasil = hasil + keranjang[i].total;
+  for (int i = 0; i < list.length; i++) {
+    hasil = hasil + list[i].total;
   }
   return hasil;
 }
 
-int totalDurasi() {
+int totalDurasi([List<ItemKeranjang>? items]) {
+  List<ItemKeranjang> list = items ?? keranjang;
   int hasil = 0;
-  for (int i = 0; i < keranjang.length; i++) {
-    hasil = hasil + keranjang[i].layanan.durasi;
+  for (int i = 0; i < list.length; i++) {
+    hasil = hasil + list[i].layanan.durasi;
   }
   return hasil;
 }

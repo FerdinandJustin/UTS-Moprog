@@ -24,15 +24,19 @@ class _DetailPageState extends State<DetailPage> {
     return hasil;
   }
 
-  void tambahKeKeranjang() {
+  ItemKeranjang buatItem() {
     List<String> addon = [];
     for (int i = 0; i < addonDipilih.length; i++) {
       if (addonDipilih[i]) {
         addon.add(namaAddon[i]);
       }
     }
-    keranjang.add(ItemKeranjang(
-        widget.layanan, daftarDokter[dokterDipilih], addon, hargaTotal()));
+    return ItemKeranjang(
+        widget.layanan, daftarDokter[dokterDipilih], addon, hargaTotal());
+  }
+
+  void tambahKeKeranjang() {
+    keranjang.add(buatItem());
   }
 
   Widget judul(String teks) {
@@ -232,10 +236,12 @@ class _DetailPageState extends State<DetailPage> {
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 onPressed: () {
-                  tambahKeKeranjang();
+                  ItemKeranjang itemLangsung = buatItem();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const JadwalPage()),
+                    MaterialPageRoute(
+                      builder: (context) => JadwalPage(items: [itemLangsung]),
+                    ),
                   );
                 },
                 child: const Text('Reservasi', style: TextStyle(fontSize: 16)),

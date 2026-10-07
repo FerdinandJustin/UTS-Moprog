@@ -203,7 +203,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.blue.shade900,
         unselectedItemColor: Colors.grey,
         onTap: (int index) {
           if (index == 1) {

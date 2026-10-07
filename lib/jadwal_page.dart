@@ -3,7 +3,8 @@ import 'data.dart';
 import 'ringkasan_page.dart';
 
 class JadwalPage extends StatefulWidget {
-  const JadwalPage({super.key});
+  final List<ItemKeranjang>? items;
+  const JadwalPage({super.key, this.items});
 
   @override
   State<JadwalPage> createState() => _JadwalPageState();
@@ -256,7 +257,7 @@ class _JadwalPageState extends State<JadwalPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Estimasi durasi: ${totalDurasi()} menit',
+            Text('Estimasi durasi: ${totalDurasi(widget.items)} menit',
                 style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
             const SizedBox(height: 12),
             const Text('Pilih Tanggal',
@@ -306,7 +307,7 @@ class _JadwalPageState extends State<JadwalPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => RingkasanPage(
-                          tanggal: teksTanggal, jam: jamDipilih),
+                          tanggal: teksTanggal, jam: jamDipilih, items: widget.items),
                     ),
                   );
                 }

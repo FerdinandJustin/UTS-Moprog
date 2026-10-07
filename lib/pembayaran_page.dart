@@ -4,7 +4,9 @@ import 'data.dart';
 class PembayaranPage extends StatefulWidget {
   final String tanggal;
   final String jam;
-  const PembayaranPage({super.key, required this.tanggal, required this.jam});
+  final List<ItemKeranjang>? items;
+  const PembayaranPage(
+      {super.key, required this.tanggal, required this.jam, this.items});
 
   @override
   State<PembayaranPage> createState() => _PembayaranPageState();
@@ -15,10 +17,12 @@ class _PembayaranPageState extends State<PembayaranPage> {
   bool sudahBayar = false;
   int totalBayar = 0; // total layanan, disimpan sebelum keranjang dikosongkan
 
+  List<ItemKeranjang> get daftarItem => widget.items ?? keranjang;
+  int get totalHargaLayanan => totalHarga(daftarItem);
+
   // BARU: nominal deposit yang dibayar sekarang
   static const int persenDeposit = 30;
 
-  // UBAH: 'Bayar di Klinik' diganti QRIS karena deposit harus dibayar sekarang
   List<String> namaMetode = [
     'Transfer Bank (BCA)',
     'E-Wallet (GoPay)',
@@ -91,38 +95,35 @@ class _PembayaranPageState extends State<PembayaranPage> {
               children: [
                 Row(
                   children: [
-                    const Text('Total layanan'), // UBAH: label
+                    const Text('Total layanan'),
                     const Spacer(),
-                    Text(formattingHarga(totalHarga())),
+                    Text(formattingHarga(totalHargaLayanan)),
                   ],
                 ),
                 const SizedBox(height: 6),
-                // UBAH: "Biaya reservasi Gratis" jadi deposit booking
                 Row(
                   children: [
                     const Text('Deposit booking'),
                     const Spacer(),
-                    Text(formattingHarga(depositBayar(totalHarga()))),
+                    Text(formattingHarga(depositBayar(totalHargaLayanan))),
                   ],
                 ),
                 const SizedBox(height: 6),
-                // BARU: sisa yang dibayar di klinik
                 Row(
                   children: [
                     const Text('Sisa bayar di klinik'),
                     const Spacer(),
-                    Text(formattingHarga(sisaBayar(totalHarga()))),
+                    Text(formattingHarga(sisaBayar(totalHargaLayanan))),
                   ],
                 ),
                 const Divider(),
                 Row(
                   children: [
-                    const Text('Dibayar sekarang', // UBAH: label
+                    const Text('Dibayar sekarang',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold)),
                     const Spacer(),
-                    // UBAH: yang ditampilkan sekarang deposit, bukan total
-                    Text(formattingHarga(depositBayar(totalHarga())),
+                    Text(formattingHarga(depositBayar(totalHargaLayanan)),
                         style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -130,7 +131,6 @@ class _PembayaranPageState extends State<PembayaranPage> {
                   ],
                 ),
                 const SizedBox(height: 8),
-                // BARU: keterangan deposit
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -205,13 +205,12 @@ class _PembayaranPageState extends State<PembayaranPage> {
                 baris('Tanggal', widget.tanggal),
                 baris('Jam', widget.jam),
                 baris('Metode', namaMetode[metode]),
-                // UBAH: rincian total, deposit, dan sisa
                 baris('Total layanan', formattingHarga(totalBayar)),
                 baris('Deposit dibayar',
                     formattingHarga(depositBayar(totalBayar))),
                 baris('Sisa bayar di klinik',
                     formattingHarga(sisaBayar(totalBayar))),
-                baris('Status', 'Deposit lunas'), // UBAH
+                baris('Status', 'Deposit lunas'),
               ],
             ),
           ),
@@ -249,20 +248,25 @@ class _PembayaranPageState extends State<PembayaranPage> {
               onPressed: () {
                 if (!sudahBayar) {
                   setState(() {
-                    totalBayar = totalHarga();
+                    totalBayar = totalHargaLayanan;
                     sudahBayar = true;
                   });
                 } else {
-                  keranjang.clear();
+                  if (widget.items != null) {
+                    for (var item in widget.items!) {
+                      keranjang.remove(item);
+                    }
+                  } else {
+                    keranjang.clear();
+                  }
                   // kembali ke halaman paling awal (Home)
                   Navigator.popUntil(context, (route) => route.isFirst);
                 }
               },
-              // UBAH: teks tombol menampilkan nominal deposit
               child: Text(
                   sudahBayar
                       ? 'Kembali ke Beranda'
-                      : 'Bayar Deposit ${formattingHarga(depositBayar(totalHarga()))}',
+                      : 'Bayar Deposit ${formattingHarga(depositBayar(totalHargaLayanan))}',
                   style: const TextStyle(fontSize: 18)),
             ),
           ),

@@ -36,7 +36,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
                 fit: BoxFit.cover,
                 errorBuilder: (BuildContext context, Object error,
                     StackTrace? stackTrace) {
-                  return Icon(item.layanan.ikon, color: Colors.blue.shade900, size: 30);
+                  return Icon(item.layanan.ikon, color: Colors.blue, size: 30);
                 },
               ),
             ),
