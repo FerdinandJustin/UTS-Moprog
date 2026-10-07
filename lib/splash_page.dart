@@ -15,81 +15,92 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              const Spacer(),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // 1. Gambar background full 1 layar & otomatis melebar/menyesuaikan ukuran layar
+          Image.asset(
+            'assets/gigi.png',
+            fit: BoxFit.cover,
+          ),
 
-              // logo
-              const Icon(Icons.local_hospital, color: Colors.blue, size: 80),
-              const SizedBox(height: 8),
-              const Text('DentEase',
-                  style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue)),
-              Text('Healthy Smile, Brighter You',
-                  style: TextStyle(fontSize: 16, color: Colors.blue.shade400)),
-
-              const Spacer(),
-
-              // gambar gigi (pakai ikon dulu, nanti bisa diganti Image.asset)
-              Container(
-                width: 220,
-                height: 220,
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade100,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.sentiment_satisfied_alt,
-                    color: Colors.white, size: 140),
-              ),
-
-              const Spacer(),
-
-              // tombol mulai
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                  onPressed: () {
-                    masukKeHome(context);
-                  },
-                  child: const Text('Mulai Sekarang',
-                      style: TextStyle(fontSize: 18)),
-                ),
-              ),
-              const SizedBox(height: 12),
-
-              // teks "sudah punya akun" (tanpa login, langsung ke Beranda juga)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Sudah punya akun? ',
-                      style: TextStyle(color: Colors.grey.shade600)),
-                  GestureDetector(
-                    onTap: () {
-                      masukKeHome(context);
-                    },
-                    child: const Text('Masuk',
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold)),
-                  ),
+          // 2. Efek fade (gradient overlay) supaya teks & tombol mudah dibaca
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.blue.withOpacity(0.3),
+                  Colors.blue.shade900.withOpacity(0.85),
                 ],
               ),
-              const SizedBox(height: 8),
-            ],
+            ),
           ),
-        ),
+
+          // 3. Konten Teks & Tombol di atas gambar
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  const Spacer(),
+
+                  // logo
+                  const Icon(Icons.local_hospital, color: Colors.white, size: 80),
+                  const SizedBox(height: 8),
+                  const Text('DentEase',
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
+                  Text('Healthy Smile, Brighter You',
+                      style: TextStyle(fontSize: 16, color: Colors.blue.shade100)),
+
+                  const Spacer(flex: 2),
+
+                  // tombol mulai
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.blue.shade900,
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      onPressed: () {
+                        masukKeHome(context);
+                      },
+                      child: const Text('Mulai Sekarang',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  // teks "sudah punya akun"
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Sudah punya akun? ',
+                          style: TextStyle(color: Colors.white70)),
+                      GestureDetector(
+                        onTap: () {
+                          masukKeHome(context);
+                        },
+                        child: const Text('Masuk',
+                            style: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
