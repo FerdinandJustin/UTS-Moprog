@@ -128,9 +128,9 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: Column(
                 children: [
-                  baris('Nama', nama),
-                  baris('Email', email),
-                  baris('No. Telepon', telepon),
+                  baris('Nama', namaPengguna),
+                  baris('Email', emailPengguna),
+                  baris('No. Telepon', teleponPengguna),
                   baris('Di keranjang', '${keranjang.length} layanan'),
                 ],
               ),

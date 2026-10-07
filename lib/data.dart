@@ -95,6 +95,10 @@ int totalDurasi([List<ItemKeranjang>? items]) {
   }
   return hasil;
 }
+// ===== PROFIL PENGGUNA =====
+String namaPengguna = 'Donal';
+String emailPengguna = 'donal@email.com';
+String teleponPengguna = '0812-3356-7930';
 
 String formattingHarga(int harga) {
   String angka = harga.toString();

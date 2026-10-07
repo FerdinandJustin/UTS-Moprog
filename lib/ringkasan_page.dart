@@ -86,7 +86,7 @@ class RingkasanPage extends StatelessWidget {
             ),
             judul('Data Pasien'),
             kotak(
-              const Row(
+               Row(
                 children: [
                   Icon(Icons.person, color: Colors.blue),
                   SizedBox(width: 10),
@@ -94,11 +94,11 @@ class RingkasanPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Darrell Weida Wihardi',
-                            style: TextStyle(
+                        Text(namaPengguna,
+                            style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold)),
-                        Text('darrell.825240080@stu.untar.ac.id',
-                            style: TextStyle(fontSize: 13, color: Colors.grey)),
+                        Text(emailPengguna,
+                            style: const TextStyle(fontSize: 13, color: Colors.grey)),
                       ],
                     ),
                   ),
