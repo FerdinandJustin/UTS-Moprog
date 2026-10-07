@@ -12,8 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<bool> love = [false, false, false, false, false];
-
   void bukaDetail(Layanan l) {
     Navigator.push(
       context,
@@ -37,11 +35,6 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: () {
         bukaDetail(l);
-      },
-      onDoubleTap: () {
-        setState(() {
-          love[i] = !love[i];
-        });
       },
       child: Container(
         margin: const EdgeInsets.all(6),
@@ -99,8 +92,6 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(love[i] ? Icons.favorite : Icons.favorite_border,
-                          size: 18, color: love[i] ? Colors.red : Colors.grey),
                       const Spacer(),
                       const Text('Lihat detail',
                           style: TextStyle(fontSize: 13, color: Colors.blue)),
@@ -190,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6),
-                      child: Text('Ketuk untuk detail, ketuk 2x untuk favorit',
+                      child: Text('Ketuk untuk detail',
                           style: TextStyle(
                               fontSize: 12, color: Colors.grey.shade600)),
                     ),

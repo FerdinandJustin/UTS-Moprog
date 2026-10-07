@@ -64,7 +64,7 @@ class _DetailPageState extends State<DetailPage> {
               color: Colors.blue.shade50,
               child: Image.asset(
                 l.gambar,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 errorBuilder: (BuildContext context, Object error,
                     StackTrace? stackTrace) {
                   return Icon(l.ikon, color: Colors.blue, size: 90);

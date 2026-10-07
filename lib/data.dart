@@ -62,9 +62,9 @@ const List<Layanan> daftarLayanan = [
 ];
 
 const List<String> daftarDokter = [
-  'drg. Amanda Putri',
-  'drg. Budi Santoso',
-  'drg. Citra Lestari',
+  'drg. Darrell Weida Wihardi',
+  'drg. Ferdinand Justin',
+  'drg. Gilbert Valentino Hahijary',
 ];
 
 // dua list ini berpasangan (index sama)
@@ -73,7 +73,7 @@ const List<String> namaAddon = [
   'Fluoride treatment',
   'Rontgen gigi',
 ];
-const List<int> hargaAddon = [75000, 100000, 120000];
+const List<int> hargaAddon = [100000, 120000, 120000];
 
 // ===== KERANJANG (variabel global, tanpa database) =====
 List<ItemKeranjang> keranjang = [];
