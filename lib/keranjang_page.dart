@@ -60,10 +60,10 @@ class _KeranjangPageState extends State<KeranjangPage> {
                     TextStyle(fontSize: 13, color: Colors.grey.shade600)),
                 const SizedBox(height: 4),
                 Text(formattingHarga(item.total),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue.shade900)),
+                        color: Colors.blue)),
               ],
             ),
           ),
@@ -129,10 +129,10 @@ class _KeranjangPageState extends State<KeranjangPage> {
                             fontWeight: FontWeight.bold,
                             color: Colors.grey.shade600)),
                     Text(formattingHarga(totalHarga()),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue.shade900)),
+                            color: Colors.blue)),
                   ],
                 ),
               ),
