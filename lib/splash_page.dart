@@ -49,7 +49,7 @@ class SplashPage extends StatelessWidget {
                   // logo
                   const Icon(Icons.local_hospital, color: Colors.white, size: 80),
                   const SizedBox(height: 8),
-                  const Text('DentEase',
+                  const Text('DentEasy',
                       style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
