@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               width: double.infinity,
-              color: Colors.blue,
+              color: Colors.blue.shade900,
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
@@ -155,19 +155,19 @@ class _HomePageState extends State<HomePage> {
                       margin: const EdgeInsets.all(6),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade100,
+                        color: Colors.blue.shade900,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Row(
                         children: [
                           Icon(Icons.sentiment_satisfied_alt,
-                              color: Colors.blue, size: 40),
+                              color: Colors.white, size: 40),
                           SizedBox(width: 12),
                           Expanded(
                             child: Text(
                               'Pilih layanan, tentukan jadwal, dan datang tanpa antre.',
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
                             ),
                           ),
                         ],

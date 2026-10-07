@@ -246,7 +246,7 @@ class _JadwalPageState extends State<JadwalPage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue.shade900,
         foregroundColor: Colors.white,
         centerTitle: true,
         title: const Text('Pilih Jadwal'),
@@ -293,7 +293,7 @@ class _JadwalPageState extends State<JadwalPage> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.blue.shade900,
                   foregroundColor: Colors.white,
                   padding:
                   const EdgeInsets.symmetric(horizontal: 24, vertical: 14),

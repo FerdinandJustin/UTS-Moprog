@@ -78,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue.shade900,
         foregroundColor: Colors.white,
         centerTitle: true,
         title: const Text('Akun Saya'),
@@ -93,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.blue.shade100,
+                color: Colors.blue.shade900,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -101,18 +101,18 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     width: 80,
                     height: 80,
-                    decoration: const BoxDecoration(
-                        color: Colors.blue, shape: BoxShape.circle),
+                    decoration: BoxDecoration(
+                        color: Colors.blue.shade800, shape: BoxShape.circle),
                     child: const Icon(Icons.person,
                         color: Colors.white, size: 50),
                   ),
                   const SizedBox(height: 10),
                   Text(nama,
                       style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.bold)),
+                          fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
                   Text(email,
                       style: TextStyle(
-                          fontSize: 14, color: Colors.grey.shade700)),
+                          fontSize: 14, color: Colors.blue.shade100)),
                 ],
               ),
             ),
@@ -155,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Switch(
                     value: notifikasi,
-                    activeThumbColor: Colors.blue,
+                    activeThumbColor: Colors.blue.shade900,
                     onChanged: (bool nilai) {
                       setState(() {
                         notifikasi = nilai;

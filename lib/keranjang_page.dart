@@ -25,8 +25,21 @@ class _KeranjangPageState extends State<KeranjangPage> {
           Container(
             width: 60,
             height: 60,
-            color: Colors.blue.shade50,
-            child: Icon(item.layanan.ikon, color: Colors.blue, size: 30),
+            decoration: BoxDecoration(
+              color: Colors.blue.shade50,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                item.layanan.gambar,
+                fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object error,
+                    StackTrace? stackTrace) {
+                  return Icon(item.layanan.ikon, color: Colors.blue.shade900, size: 30);
+                },
+              ),
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -47,10 +60,10 @@ class _KeranjangPageState extends State<KeranjangPage> {
                     TextStyle(fontSize: 13, color: Colors.grey.shade600)),
                 const SizedBox(height: 4),
                 Text(formattingHarga(item.total),
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue)),
+                        color: Colors.blue.shade900)),
               ],
             ),
           ),
@@ -72,7 +85,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue.shade900,
         foregroundColor: Colors.white,
         centerTitle: true,
         title: const Text('Keranjang'),
@@ -116,16 +129,16 @@ class _KeranjangPageState extends State<KeranjangPage> {
                             fontWeight: FontWeight.bold,
                             color: Colors.grey.shade600)),
                     Text(formattingHarga(totalHarga()),
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue)),
+                            color: Colors.blue.shade900)),
                   ],
                 ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.blue.shade900,
                   foregroundColor: Colors.white,
                   padding:
                   const EdgeInsets.symmetric(horizontal: 24, vertical: 14),

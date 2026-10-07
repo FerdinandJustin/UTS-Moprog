@@ -50,7 +50,7 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue.shade900,
         foregroundColor: Colors.white,
         centerTitle: true,
         title: const Text('Detail Layanan'),
@@ -58,17 +58,36 @@ class _DetailPageState extends State<DetailPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
-              height: 200,
-              color: Colors.blue.shade50,
-              child: Image.asset(
-                l.gambar,
-                fit: BoxFit.cover,
-                errorBuilder: (BuildContext context, Object error,
-                    StackTrace? stackTrace) {
-                  return Icon(l.ikon, color: Colors.blue, size: 90);
-                },
+              height: 220,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    l.gambar,
+                    fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Container(
+                        color: Colors.blue.shade50,
+                        child: Icon(l.ikon, color: Colors.blue, size: 90),
+                      );
+                    },
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.blue.withOpacity(0.2),
+                          Colors.blue.shade900.withOpacity(0.8),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -205,7 +224,7 @@ class _DetailPageState extends State<DetailPage> {
               const SizedBox(width: 8),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.blue.shade900,
                   foregroundColor: Colors.white,
                   padding:
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
