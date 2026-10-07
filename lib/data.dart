@@ -27,7 +27,7 @@ const List<Layanan> daftarLayanan = [
   Layanan(
       'Scaling & Cleaning',
       'Pembersihan karang gigi dan plak agar gigi bersih, napas segar, dan gusi lebih sehat.',
-      'assets/scaling.png',
+      'assets/scalling.png',
       350000,
       45,
       Icons.cleaning_services),
@@ -41,7 +41,7 @@ const List<Layanan> daftarLayanan = [
   Layanan(
       'Pemutihan Gigi',
       'Perawatan bleaching untuk mencerahkan warna gigi beberapa tingkat lebih putih.',
-      'assets/bleaching.png',
+      'assets/pemutihan.png',
       1500000,
       90,
       Icons.auto_awesome),
@@ -55,7 +55,7 @@ const List<Layanan> daftarLayanan = [
   Layanan(
       'Perawatan Gigi Anak',
       'Pemeriksaan dan perawatan gigi untuk anak dengan pendekatan yang ramah dan nyaman.',
-      'assets/anak.png',
+      'assets/perawatan_anak.png',
       300000,
       40,
       Icons.child_care),

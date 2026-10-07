@@ -56,14 +56,20 @@ class _HomePageState extends State<HomePage> {
             Container(
               width: ukuranGambar,
               height: ukuranGambar,
-              color: Colors.blue.shade50,
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
               child: Image.asset(
                 l.gambar,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 errorBuilder: (BuildContext context, Object error,
                     StackTrace? stackTrace) {
                   return Icon(l.ikon, color: Colors.blue, size: 40);
-                },
+                  },
+                ),
               ),
             ),
             const SizedBox(width: 12),
