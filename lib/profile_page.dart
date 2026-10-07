@@ -13,9 +13,9 @@ class _ProfilePageState extends State<ProfilePage> {
   bool notifikasi = true;
 
   // data dummy pengguna
-  String nama = 'Budi Santoso';
-  String email = 'budi@email.com';
-  String telepon = '0812-3456-7890';
+  String nama = 'Donal';
+  String email = 'donal@email.com';
+  String telepon = '0812-3356-7930';
 
   // satu baris menu (ikon, teks, panah)
   Widget menu(IconData ikon, String teks) {
