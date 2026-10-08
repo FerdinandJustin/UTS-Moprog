@@ -202,6 +202,9 @@ class _PembayaranPageState extends State<PembayaranPage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.blue)),
                 const Divider(height: 24),
+                baris('Nama pasien', namaPengguna),
+                for (int i = 0; i < daftarItem.length; i++)
+                  baris(daftarItem[i].layanan.nama, daftarItem[i].dokter),
                 baris('Tanggal', widget.tanggal),
                 baris('Jam', widget.jam),
                 baris('Metode', namaMetode[metode]),

@@ -12,11 +12,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool notifikasi = true;
 
-  // data dummy pengguna
-  String nama = 'Donal';
-  String email = 'donal@email.com';
-  String telepon = '0812-3356-7930';
-
   // satu baris menu (ikon, teks, panah)
   Widget menu(IconData ikon, String teks) {
     return GestureDetector(
@@ -107,10 +102,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.white, size: 50),
                   ),
                   const SizedBox(height: 10),
-                  Text(nama,
+                  Text(namaPengguna,
                       style: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-                  Text(email,
+                  Text(emailPengguna,
                       style: TextStyle(
                           fontSize: 14, color: Colors.blue.shade100)),
                 ],
