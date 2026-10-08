@@ -31,14 +31,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                item.layanan.gambar,
-                fit: BoxFit.cover,
-                errorBuilder: (BuildContext context, Object error,
-                    StackTrace? stackTrace) {
-                  return Icon(item.layanan.ikon, color: Colors.blue, size: 30);
-                },
-              ),
+              child: Image.asset(item.layanan.gambar, fit: BoxFit.cover),
             ),
           ),
           const SizedBox(width: 12),
@@ -145,6 +138,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),
+                // JadwalPage() tanpa parameter items berarti jadwal untuk semua isi keranjang
                 onPressed: keranjang.isEmpty
                     ? null
                     : () {

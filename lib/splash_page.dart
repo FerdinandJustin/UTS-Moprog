@@ -4,7 +4,6 @@ import 'home_page.dart';
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
-  // pindah ke Beranda, splash dihapus supaya tidak bisa dibalikin dengan tombol back
   void masukKeHome(BuildContext context) {
     Navigator.pushReplacement(
       context,
@@ -18,13 +17,11 @@ class SplashPage extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // 1. Gambar background full 1 layar & otomatis melebar/menyesuaikan ukuran layar
           Image.asset(
             'assets/gigi.png',
             fit: BoxFit.cover,
           ),
 
-          // 2. Efek fade (gradient overlay) supaya teks & tombol mudah dibaca
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -38,7 +35,6 @@ class SplashPage extends StatelessWidget {
             ),
           ),
 
-          // 3. Konten Teks & Tombol di atas gambar
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(24),
@@ -46,7 +42,6 @@ class SplashPage extends StatelessWidget {
                 children: [
                   const Spacer(),
 
-                  // logo
                   const Icon(Icons.local_hospital, color: Colors.white, size: 80),
                   const SizedBox(height: 8),
                   const Text('DentEasy',
@@ -59,7 +54,6 @@ class SplashPage extends StatelessWidget {
 
                   const Spacer(flex: 2),
 
-                  // tombol mulai
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -79,7 +73,6 @@ class SplashPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
 
-                  // teks "sudah punya akun"
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -20,8 +20,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
   List<ItemKeranjang> get daftarItem => widget.items ?? keranjang;
   int get totalHargaLayanan => totalHarga(daftarItem);
 
-  // BARU: nominal deposit yang dibayar sekarang
-  static const int persenDeposit = 30;
+  int persenDeposit = 30;
 
   List<String> namaMetode = [
     'Transfer Bank (BCA)',
@@ -34,9 +33,14 @@ class _PembayaranPageState extends State<PembayaranPage> {
     Icons.qr_code_2
   ];
 
-  // BARU: deposit tidak boleh lebih besar dari total layanan
-  int depositBayar(int total) => total * persenDeposit ~/ 100;
-  int sisaBayar(int total) => total - depositBayar(total);
+  // ~/ = pembagian bulat, hasilnya tetap int
+  int depositBayar(int total) {
+    return total * persenDeposit ~/ 100;
+  }
+
+  int sisaBayar(int total) {
+    return total - depositBayar(total);
+  }
 
   Widget formPembayaran() {
     return SingleChildScrollView(
@@ -196,6 +200,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
               children: [
                 const Text('Kode Booking',
                     style: TextStyle(fontSize: 13, color: Colors.grey)),
+                // kode booking masih statis (dummy)
                 const Text('KLN-2026-0412',
                     style: TextStyle(
                         fontSize: 28,
@@ -249,12 +254,16 @@ class _PembayaranPageState extends State<PembayaranPage> {
                     borderRadius: BorderRadius.circular(10)),
               ),
               onPressed: () {
+                // satu tombol dengan dua fungsi, tergantung sudahBayar:
+                // false "Bayar Deposit": ubah sudahBayar jadi true, halaman berganti ke konfirmasi
+                // true "Kembali ke Beranda": kosongkan keranjang lalu kembali ke halaman awal
                 if (!sudahBayar) {
                   setState(() {
                     totalBayar = totalHargaLayanan;
                     sudahBayar = true;
                   });
                 } else {
+                  // reservasi langsung: hapus item itu saja, dari keranjang: kosongkan semuanya
                   if (widget.items != null) {
                     for (var item in widget.items!) {
                       keranjang.remove(item);
@@ -262,7 +271,6 @@ class _PembayaranPageState extends State<PembayaranPage> {
                   } else {
                     keranjang.clear();
                   }
-                  // kembali ke halaman paling awal (Home)
                   Navigator.popUntil(context, (route) => route.isFirst);
                 }
               },

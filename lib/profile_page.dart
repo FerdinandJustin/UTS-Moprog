@@ -41,7 +41,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // satu baris info (label di kiri, isi di kanan)
   Widget baris(String label, String nilai) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -83,7 +82,6 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // foto profil + nama
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),

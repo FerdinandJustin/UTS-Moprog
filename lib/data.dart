@@ -1,18 +1,14 @@
-import 'package:flutter/material.dart';
-
-// ===== MODEL =====
 class Layanan {
   final String nama;
   final String deskripsi;
   final String gambar;
   final int harga;
   final int durasi; // menit
-  final IconData ikon;
 
-  const Layanan(this.nama, this.deskripsi, this.gambar, this.harga,
-      this.durasi, this.ikon);
+  const Layanan(this.nama, this.deskripsi, this.gambar, this.harga, this.durasi);
 }
 
+// satu item di keranjang: layanan + dokter + add-on yang dipilih + total harganya
 class ItemKeranjang {
   final Layanan layanan;
   final String dokter;
@@ -22,43 +18,38 @@ class ItemKeranjang {
   ItemKeranjang(this.layanan, this.dokter, this.addon, this.total);
 }
 
-// ===== DATA DUMMY =====
+// data dummy layanan
 const List<Layanan> daftarLayanan = [
   Layanan(
       'Scaling & Cleaning',
       'Pembersihan karang gigi dan plak agar gigi bersih, napas segar, dan gusi lebih sehat.',
       'assets/scalling.png',
       350000,
-      45,
-      Icons.cleaning_services),
+      45),
   Layanan(
       'Tambal Gigi',
       'Menutup gigi berlubang dengan bahan komposit sewarna gigi supaya tampak alami.',
       'assets/tambal.png',
       450000,
-      60,
-      Icons.medical_services),
+      60),
   Layanan(
       'Pemutihan Gigi',
       'Perawatan bleaching untuk mencerahkan warna gigi beberapa tingkat lebih putih.',
       'assets/pemutihan.png',
       1500000,
-      90,
-      Icons.auto_awesome),
+      90),
   Layanan(
       'Cabut Gigi',
       'Pencabutan gigi yang rusak atau gigi bungsu dengan prosedur aman dan minim nyeri.',
       'assets/cabut.png',
       600000,
-      45,
-      Icons.healing),
+      45),
   Layanan(
       'Perawatan Gigi Anak',
       'Pemeriksaan dan perawatan gigi untuk anak dengan pendekatan yang ramah dan nyaman.',
       'assets/perawatan_anak.png',
       300000,
-      40,
-      Icons.child_care),
+      40),
 ];
 
 const List<String> daftarDokter = [
@@ -67,7 +58,6 @@ const List<String> daftarDokter = [
   'drg. Gilbert Valentino Hahijary',
 ];
 
-// dua list ini berpasangan (index sama)
 const List<String> namaAddon = [
   'Anestesi lokal',
   'Fluoride treatment',
@@ -75,9 +65,11 @@ const List<String> namaAddon = [
 ];
 const List<int> hargaAddon = [100000, 120000, 120000];
 
-// ===== KERANJANG (variabel global, tanpa database) =====
+// keranjang disimpan di variabel global supaya bisa diakses semua halaman
 List<ItemKeranjang> keranjang = [];
 
+// items opsional: kalau tidak diisi (null) pakai isi keranjang,
+// kalau diisi (dari tombol Reservasi di halaman detail) pakai list yang dikirim
 int totalHarga([List<ItemKeranjang>? items]) {
   List<ItemKeranjang> list = items ?? keranjang;
   int hasil = 0;
@@ -95,11 +87,13 @@ int totalDurasi([List<ItemKeranjang>? items]) {
   }
   return hasil;
 }
-// ===== PROFIL PENGGUNA =====
+
 String namaPengguna = 'Donal';
 String emailPengguna = 'donal@email.com';
 String teleponPengguna = '0812-3356-7930';
 
+// ubah angka ke format rupiah, contoh 350000 jadi Rp 350.000
+// titik disisipkan setiap 3 digit, dihitung dari belakang
 String formattingHarga(int harga) {
   String angka = harga.toString();
   String hasil = '';

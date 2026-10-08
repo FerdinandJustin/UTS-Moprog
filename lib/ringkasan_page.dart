@@ -31,6 +31,7 @@ class RingkasanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // items terisi kalau dari tombol Reservasi, kalau null berarti pakai isi keranjang
     List<ItemKeranjang> daftarItem = items ?? keranjang;
 
     return Scaffold(

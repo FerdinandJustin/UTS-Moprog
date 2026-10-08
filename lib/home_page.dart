@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(builder: (context) => DetailPage(layanan: l)),
     ).then((_) {
-      setState(() {}); // refresh badge keranjang
+      setState(() {});
     });
   }
 
@@ -55,14 +55,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                l.gambar,
-                fit: BoxFit.cover,
-                errorBuilder: (BuildContext context, Object error,
-                    StackTrace? stackTrace) {
-                  return Icon(l.ikon, color: Colors.blue, size: 40);
-                  },
-                ),
+              child: Image.asset(l.gambar, fit: BoxFit.cover),
               ),
             ),
             const SizedBox(width: 12),
@@ -110,6 +103,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // layar responsif: lebar < 600 (HP) 1 kolom, lebih lebar jadi 2 kolom
+    // lebar card diatur lewat SizedBox di dalam Wrap, jadi otomatis turun ke baris berikutnya
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallWidth = screenWidth < 600;
     final double ukuranGambar = isSmallWidth ? 100 : 90;
@@ -205,11 +200,12 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue.shade900,
         unselectedItemColor: Colors.grey,
+        // index 0 = Beranda (halaman ini), 1 = Keranjang, 2 = Akun
         onTap: (int index) {
           if (index == 1) {
             bukaKeranjang();
           }
-          if (index == 2) { // BARU
+          if (index == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ProfilePage()),
@@ -225,6 +221,7 @@ class _HomePageState extends State<HomePage> {
               clipBehavior: Clip.none,
               children: [
                 const Icon(Icons.shopping_cart),
+                // badge merah jumlah item, hanya muncul kalau keranjang ada isinya
                 if (keranjang.isNotEmpty)
                   Positioned(
                     right: -6,

@@ -11,9 +11,12 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  // index dokter yang dipilih, default dokter pertama
   int dokterDipilih = 0;
+  // status centang tiap add-on, urutannya sama dengan namaAddon dan hargaAddon
   List<bool> addonDipilih = [false, false, false];
 
+  // harga layanan ditambah harga semua add-on yang dicentang
   int hargaTotal() {
     int hasil = widget.layanan.harga;
     for (int i = 0; i < addonDipilih.length; i++) {
@@ -68,17 +71,7 @@ class _DetailPageState extends State<DetailPage> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset(
-                    l.gambar,
-                    fit: BoxFit.cover,
-                    errorBuilder: (BuildContext context, Object error,
-                        StackTrace? stackTrace) {
-                      return Container(
-                        color: Colors.blue.shade50,
-                        child: Icon(l.ikon, color: Colors.blue, size: 90),
-                      );
-                    },
-                  ),
+                  Image.asset(l.gambar, fit: BoxFit.cover),
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -236,6 +229,7 @@ class _DetailPageState extends State<DetailPage> {
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 onPressed: () {
+                  // Reservasi langsung mengarahkan item ke JadwalPage tanpa lewat keranjang
                   ItemKeranjang itemLangsung = buatItem();
                   Navigator.push(
                     context,

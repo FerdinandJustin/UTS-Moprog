@@ -12,8 +12,9 @@ class JadwalPage extends StatefulWidget {
 
 class _JadwalPageState extends State<JadwalPage> {
   DateTime sekarang = DateTime.now();
-  late int tahun;
-  late int bulan;
+  int tahun = DateTime.now().year;
+  int bulan = DateTime.now().month;
+  // tanggalDipilih 0 = belum memilih, jamDipilih kosong = belum memilih
   int tanggalDipilih = 0;
   String jamDipilih = '';
 
@@ -29,13 +30,6 @@ class _JadwalPageState extends State<JadwalPage> {
     '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    tahun = sekarang.year;
-    bulan = sekarang.month;
-  }
-
   // tanggal aktif: bukan masa lalu dan bukan hari Minggu (klinik tutup)
   bool tanggalAktif(int t) {
     DateTime d = DateTime(tahun, bulan, t);
@@ -49,11 +43,12 @@ class _JadwalPageState extends State<JadwalPage> {
         t == sekarang.day;
   }
 
-  // simulasi ketersediaan slot (dummy)
+  // slot dianggap penuh kalau (tanggal + index jam) habis dibagi 4
   bool jamPenuh(int index) {
     return (tanggalDipilih + index) % 4 == 0;
   }
 
+  // tombol bulan sebelumnya mati kalau sudah di bulan sekarang
   bool bisaMundur() {
     return (tahun * 12 + bulan) > (sekarang.year * 12 + sekarang.month);
   }
@@ -119,8 +114,9 @@ class _JadwalPageState extends State<JadwalPage> {
   }
 
   Widget kalender() {
+    // DateTime(tahun, bulan + 1, 0) = hari terakhir bulan ini, jadi .day = jumlah hari
     int hariDalamBulan = DateTime(tahun, bulan + 1, 0).day;
-    int offset = DateTime(tahun, bulan, 1).weekday - 1; // Senin = 0
+    int offset = DateTime(tahun, bulan, 1).weekday - 1;
 
     List<Widget> baris = [];
     for (int minggu = 0; minggu < 6; minggu++) {
@@ -184,7 +180,7 @@ class _JadwalPageState extends State<JadwalPage> {
             ],
           ),
           const SizedBox(height: 4),
-          ...baris,
+          Column(children: baris),
           const SizedBox(height: 8),
           Text('Klinik tutup hari Minggu',
               style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
@@ -238,6 +234,7 @@ class _JadwalPageState extends State<JadwalPage> {
 
   @override
   Widget build(BuildContext context) {
+    // tombol Lanjut baru aktif kalau tanggal dan jam sudah dipilih
     bool siap = tanggalDipilih != 0 && jamDipilih != '';
     String teksTanggal = tanggalDipilih == 0
         ? '-'
